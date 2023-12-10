@@ -13,6 +13,7 @@ const MyCalendar = () => {
 
   const addEvent = () => {
     const newEvent = {
+      id: Date.now(),
       date,
       title: 'New Event',
     };
@@ -28,6 +29,11 @@ const MyCalendar = () => {
   const handleEditEvent = (eventId) => {
     // Implement logic to edit an existing event
     // Update the events state accordingly
+  };
+
+  const deleteEvent = (eventId) => {
+    const updatedEvents = events.filter((event) => event.id !== eventId);
+    setEvents(updatedEvents);
   };
 
   const handleDeleteEvent = (eventId) => {
@@ -48,6 +54,7 @@ const MyCalendar = () => {
     {events.map((event, index) => (
       <li key={index}>
         {event.title} - {event.date.toDateString()}
+        <button onClick={() => deleteEvent(event.id)}>Delete</button>
       </li>
     ))}
   </ul>
